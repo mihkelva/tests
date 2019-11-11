@@ -33,7 +33,7 @@ const Test1 = () => {
         <img style={{width: 200}} src={test1Example}/>
       </div>
       <div>
-        fetch(ITEMS).then(res =>{res.json()});
+        {/*fetch(ITEMS).then(res =>{res.json()});*/}
         <div className={"item_title"}>{this.ITEMS.name}</div>
         <div className={"item_price"}>{this.ITEMS.price}</div>
       </div>

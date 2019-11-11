@@ -15,7 +15,8 @@ router.get("/random", async (req, res)=>{
 });
 
 router.get("/similar/:productId", async (req, res)=>{
-  res.status(500).send("Implement")
+  res.status(500).send("Implement");
+
 });
 
 module.exports = router;
