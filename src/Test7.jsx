@@ -32,7 +32,7 @@ class Test7 extends React.PureComponent {
   };
 
   handleDisable = () => {
-
+    console.log("click");
   };
 
   render() {
@@ -77,7 +77,9 @@ class Test7 extends React.PureComponent {
           </div>
           <input type="submit" value="Salvesta" />
         </form>
-        <button>Click me</button>
+        <button onClick={this.handleDisable}>
+          Enable/Disable
+        </button>
       </div>
     );
   }
