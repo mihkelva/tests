@@ -8,5 +8,9 @@ router.get("/", async (req, res)=>{
   res.send(xs);
 });
 
+router.post("/", (req,res) =>{
+
+});
+
 module.exports = router;
 

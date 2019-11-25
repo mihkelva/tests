@@ -1,11 +1,83 @@
 import React from "react";
 
 class Test7 extends React.PureComponent {
+
+  state = {
+    fullName: "",
+    phoneNumber: "",
+    address: "",
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(this.state);
+    fetch("/api/v1/users/",{
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify(this.state),
+    })
+      .then(res => res.json)
+      .catch( err=>{
+        console.log(err, "err");
+        },
+      );
+  };
+
+  handleDisable = () => {
+
+  };
+
   render() {
     return (
       <div>
         <Task />
-        implement
+        <form onSubmit={this.handleSubmit}>
+          <div> <label>
+            Name:
+            <input
+              onChange={this.handleChange}
+              type="text"
+              name="fullName"
+              value={this.state.fullName}
+              disabled={this.handleDisable}
+            />
+          </label>
+          </div>
+          <div>
+            <label>
+              Elukoht:
+              <input
+                onChange={this.handleChange}
+                type="text"
+                name="address"
+                value={this.state.address}
+                disabled={this.handleDisable}
+              />
+            </label>
+          </div>
+          <div>
+            <label>
+              Kontaktnumber:
+              <input
+                onChange={this.handleChange}
+                type="number"
+                name="phoneNumber"
+                value={this.state.phoneNumber}
+                disabled={this.handleDisable}
+              />
+            </label>
+          </div>
+          <input type="submit" value="Salvesta" />
+        </form>
+        <button>Click me</button>
       </div>
     );
   }
@@ -34,5 +106,7 @@ const Task = () => (
         <a href={'https://reactjs.org/docs/forms.html'}>https://reactjs.org/docs/forms.html</a></li>
 
     </ol>
+
   </div>
+
 );
