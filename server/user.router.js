@@ -2,11 +2,13 @@ const express = require("express");
 const router = express.Router();
 const {User} = require("./user.model.js");
 const mongoose = require("mongoose");
+const multer = require('multer');
 
 router.get("/", async (req, res)=>{
   const xs = await User.find({});
   res.send(xs);
 });
+
 
 router.post("/", async (req, res)=> {
   console.log('body', req.body);
@@ -41,6 +43,7 @@ router.post("/", async (req, res)=> {
 //     res.send(201);
 //   });
 // });
+
 /** Add something here*/
 
 module.exports = router;
