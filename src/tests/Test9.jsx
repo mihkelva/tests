@@ -1,11 +1,64 @@
 import React from "react";
 
 class Test9 extends React.PureComponent {
+
+  state = {
+    fullName: "",
+    personalCode: "",
+    phoneNumber: "",
+    address: "",
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(this.state);
+    fetch("/api/v1/users/",{
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify(this.state),
+    })
+      .then(res => res.json)
+      .catch( err=>{
+          console.log(err, "err");
+        },
+      );
+  };
+
+
   render() {
     return (
       <div>
         <Task />
-        implement
+        <form onSubmit={this.handleSubmit} className="ds-item style-2" >
+          <h3 className="style-2">Kliendi vorm</h3>
+          <div className={"row"}>
+            <label htmlFor="fullName">Kliendi nimi</label>
+            <input onChange={this.handleChange} name="fullName" type="text" value={this.state.fullName}/>
+          </div>
+          <div className={"row"}>
+            <label htmlFor="personalCode">Isikukood</label>
+            <input onChange={this.handleChange} name="personalCode" type="text" value={this.state.personalCode}/>
+          </div>
+          <div className={"row"}>
+            <label htmlFor="personalCode">Telefoni number</label>
+            <input onChange={this.handleChange} name="phoneNumber" type="text" value={this.state.phoneNumber}/>
+          </div>
+          <div className={"row"}>
+            <label htmlFor="personalCode">Aadress</label>
+            <input onChange={this.handleChange} name="address" type="text" value={this.state.address}/>
+          </div>
+          <button style={{width: "100%"}}>
+            Salvesta
+          </button>
+        </form>
       </div>
     );
   }
