@@ -41,22 +41,37 @@ class Test9 extends React.PureComponent {
           <h3 className="style-2">Kliendi vorm</h3>
           <div className={"row"}>
             <label htmlFor="fullName">Kliendi nimi</label>
-            <input onChange={this.handleChange} name="fullName" type="text" value={this.state.fullName}/>
+            <input
+              onChange={this.handleChange}
+              name="fullName"
+              type="text"
+              value={this.state.fullName}/>
           </div>
           <div className={"row"}>
             <label htmlFor="personalCode">Isikukood</label>
-            <input onChange={this.handleChange} name="personalCode" type="text" value={this.state.personalCode}/>
-          </div>
-          <div className={"row"}>
-            <label htmlFor="personalCode">Telefoni number</label>
-            <input onChange={this.handleChange} name="phoneNumber" type="text" value={this.state.phoneNumber}/>
+            <input
+              onChange={this.handleChange}
+              name="personalCode"
+              type="text"
+              value={this.state.personalCode}/>
           </div>
           <div className={"row"}>
             <label htmlFor="personalCode">Aadress</label>
-            <input onChange={this.handleChange} name="address" type="text" value={this.state.address}/>
+            <input
+              onChange={this.handleChange}
+              name="address" type="text"
+              value={this.state.address}/>
+          </div>
+          <div className={"row"}>
+            <label htmlFor="personalCode">Telefoni number</label>
+            <input
+              onChange={this.handleChange}
+              name="phoneNumber"
+              type="text"
+              value={this.state.phoneNumber}/>
           </div>
           <button style={{width: "100%"}}>
-            Salvesta
+            Loo või uuenda
           </button>
         </form>
       </div>
