@@ -1,6 +1,15 @@
 import React from "react";
 
 class Test10 extends React.PureComponent {
+
+  constructor(props){
+    super(props);
+    this.inputFullName = React.createRef();
+    this.inputPersonalCode = React.createRef();
+    this.inputPhoneNumber = React.createRef();
+    this.inputAddress = React.createRef();
+  }
+
   state = {
     fullName: "",
     personalCode: "",
@@ -8,13 +17,13 @@ class Test10 extends React.PureComponent {
     address: "",
   };
 
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-  };
-
   handleSubmit = (event) => {
+    const formBody = {
+      fullName: this.inputFullName.current.value,
+      personalCode: this.inputPersonalCode.current.value,
+      phoneNumber: this.inputPhoneNumber.current.value,
+      address: this.inputAddress.current.value,
+    };
     event.preventDefault();
     console.log(this.state);
     fetch("/api/v1/users/",{
@@ -22,7 +31,7 @@ class Test10 extends React.PureComponent {
       headers: {
         "content-type": "application/json"
       },
-      body: JSON.stringify(this.state),
+      body: JSON.stringify(formBody),
     })
       .then(res => res.json)
       .catch( err=>{
@@ -41,33 +50,31 @@ class Test10 extends React.PureComponent {
           <div className={"row"}>
             <label htmlFor="fullName">Kliendi nimi</label>
             <input
-              onChange={this.handleChange}
+              ref={this.inputFullName}
               name="fullName"
-              type="text"
-              value={this.state.fullName}/>
+              type="text" />
           </div>
           <div className={"row"}>
             <label htmlFor="personalCode">Isikukood</label>
             <input
-              onChange={this.handleChange}
+              ref={this.inputPersonalCode}
               name="personalCode"
-              type="text"
-              value={this.state.personalCode}/>
+              type="text" />
           </div>
           <div className={"row"}>
             <label htmlFor="personalCode">Aadress</label>
             <input
-              onChange={this.handleChange}
-              name="address" type="text"
-              value={this.state.address}/>
+              ref={this.inputAddress}
+              name="address"
+              type="text" />
           </div>
           <div className={"row"}>
+
             <label htmlFor="personalCode">Telefoni number</label>
             <input
-              onChange={this.handleChange}
+              ref={this.inputPhoneNumber}
               name="phoneNumber"
-              type="text"
-              value={this.state.phoneNumber}/>
+              type="text" />
           </div>
           <button style={{width: "100%"}}>
             Loo või uuenda
