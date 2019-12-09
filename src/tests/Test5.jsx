@@ -17,14 +17,13 @@ class Test5 extends React.PureComponent {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state);
-    // fetch("/api/v1/orders/",{
-    //   method: "POST",
-    //   headers: {
-    //     "content-type": "application/json"
-    //   },
-    //   body: JSON.stringify(this.state);
-    // })
+    fetch("/api/v1/orders/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state)
+    });
   };
 
   render() {

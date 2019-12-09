@@ -4,6 +4,36 @@ import example2 from "../images/2.png";
 import example3 from "../images/3.png";
 
 class Test3 extends React.PureComponent{
+  constructor(props){
+    super(props);
+    this.state = {
+      username: "",
+      age: 0
+    };
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    fetch("/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state)
+    }).then( res => res.text())
+      .then((responseText) => {
+        this.setState({responseText});
+      }).catch(err => {
+      console.log("Error", err);
+    });
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  }
+
   render(){
     return (
       <div>
@@ -34,11 +64,17 @@ class Test3 extends React.PureComponent{
         <form style={{width: 300}}>
           <div className={"row"}>
             <label htmlFor="username">Username</label>
-            <input name="username" type="text"/>
+            <input name="username"
+                   value={this.state.username}
+                   onChange={this.handleChange}
+                   type="text" />
           </div>
           <div className={"row"}>
             <label htmlFor="age">Age</label>
-            <input name="age"  type="number"/>
+            <input name="age"
+                   value={this.state.age}
+                   onChange={this.handleChange}
+                   type="number"/>
           </div>
           <div className={"row"} style={{justifyContent: "flex-end"}}>
             <button>Send</button>
@@ -46,10 +82,10 @@ class Test3 extends React.PureComponent{
         </form>
 
         {
-          // this.state.responseText &&
-          // <div className={"response"}>
-          //   {this.state.responseText}
-          // </div>
+          this.state.responseText &&
+          <div className={"response"}>
+            {this.state.responseText}
+          </div>
         }
 
       </div>
@@ -58,4 +94,3 @@ class Test3 extends React.PureComponent{
 }
 
 export default Test3;
-

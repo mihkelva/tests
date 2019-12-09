@@ -2,6 +2,37 @@ import React from "react";
 // import {toast} from "react-toastify";
 
 class Test6 extends React.PureComponent {
+
+  state = {
+    fullName: "",
+    burger: "",
+    drink: "",
+    orders: []
+  }
+
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(this.state);
+    fetch("/api/v1/orders/search", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state)
+    }).then( res => {
+      if(!res.ok) throw "signup failed";
+      return res.json();
+    }).then(() => {
+
+    });
+  };
+
   render() {
     return (
       <>
@@ -26,15 +57,15 @@ class Test6 extends React.PureComponent {
 
         </div>
         <div className="ds">
-          <form className="ds-item style-2">
+          <form onSubmit={this.handleSubmit} className="ds-item style-2">
             <h3 className="style-2">Andmebaasi päring</h3>
             <div className={"row"}>
               <label htmlFor="fullName">Kliendi nimi</label>
-              <input name="fullName" type="text" />
+              <input onChange={this.handleChange} name="fullName" type="text" />
             </div>
             <div className={"row"}>
               <label htmlFor="burger">Burger</label>
-              <select name="burger">
+              <select onChange={this.handleChange} name="burger">
                 <option value="">-</option>
                 <option value="megaBurger">Megaburger</option>
                 <option value="baconBurger">Peekoniburger</option>
@@ -43,7 +74,7 @@ class Test6 extends React.PureComponent {
             </div>
             <div className={"row"}>
               <label htmlFor="drink">Jook</label>
-              <select name="drink">
+              <select onChange={this.handleChange} name="drink">
                 <option value="">-</option>
                 <option value="coke">Coca-Cola</option>
                 <option value="sprite">Sprite</option>
@@ -55,11 +86,21 @@ class Test6 extends React.PureComponent {
             </button>
           </form>
 
+          <div>
+            {
+              this.state.orders.map(order => (
+                <div key={order.fullName}>
+                  <div>{order.fullName}</div>
+                  <div>{order.burger}</div>
+                  <div>{order.drink}</div>
+                </div>
+              ))
+            }
+          </div>
 
         </div>
       </>
     );
   }
 }
-
 export default Test6;

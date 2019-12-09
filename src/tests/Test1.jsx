@@ -17,9 +17,13 @@ const ITEMS = [
   }
 ];
 
-var total = 0;
-
 const Test1 = () => {
+  let productDivs = [];
+  let sum = 0;
+  ITEMS.forEach(item => {
+    productDivs.push(<div>Name: {item.name} | Price: {item.price}</div>);
+    sum += item.price;
+  });
   return (
     <div>
       <div className={"description"}>
@@ -33,14 +37,11 @@ const Test1 = () => {
         <img style={{width: 200}} src={test1Example}/>
       </div>
       <div>
-        {/*fetch(ITEMS).then(res =>{res.json()});*/}
-        <div className={"item_title"}>{this.ITEMS.name}</div>
-        <div className={"item_price"}>{this.ITEMS.price}</div>
+        {productDivs}
       </div>
-      <div><span className={"bold"}>Summa kokku:</span> ITEMS.forEach(function(total) {total += ITEMS.price},0)</div>
+      <div><span className={"bold"}>Summa kokku:</span> {sum}</div>
     </div>
   );
 };
-
 
 export default Test1;

@@ -15,39 +15,39 @@ class Test4 extends React.PureComponent{
 
   fetchRandom = () => {
     fetch("/api/v1/products/random")
-    .then( res =>{
-      return res.json();
-    })
-    .then(product =>{
-      this.setState({
-        similar: [],
-        product,
-        error: null,
+      .then( res =>{
+        return res.json();
+      })
+      .then(product =>{
+        this.setState({
+          similar: [],
+          product,
+          error: null,
+        });
+      })
+      .catch( () =>{
+        this.setState({
+          error: "Not implemented!"
+        });
       });
-    })
-    .catch( () =>{
-      this.setState({
-        error: "Not implemented!"
-      });
-    });
   }
 
   handleClick = (_id) => {
     fetch(`/api/v1/products/similar/${_id}`)
-    .then( res =>{
-      return res.json();
-    })
-    .then(similar =>{
-      this.setState({
-        similar,
-        error: null,
+      .then( res =>{
+        return res.json();
+      })
+      .then(similar =>{
+        this.setState({
+          similar,
+          error: null,
+        });
+      })
+      .catch( () =>{
+        this.setState({
+          error: "Not implemented!"
+        });
       });
-    })
-    .catch( () =>{
-      this.setState({
-        error: "Not implemented!"
-      });
-    });
   };
 
   render(){
@@ -96,9 +96,9 @@ class Test4 extends React.PureComponent{
         </div>
 
         { this.state.similar.length === 0 &&
-          <div className={"alert"}>
-            Clicked "find similar"? {this.state.error}
-          </div>
+        <div className={"alert"}>
+          Clicked "find similar"? {this.state.error}
+        </div>
         }
 
       </div>
@@ -115,9 +115,9 @@ const Product = ({_id, title, price, onClick}) => (
       ${price}
     </div>
     {onClick &&
-      <button title={"find"} onClick={() => onClick(_id)}>
-        Find similar
-      </button>
+    <button title={"find"} onClick={() => onClick(_id)}>
+      Find similar
+    </button>
     }
   </div>
 );
@@ -130,4 +130,3 @@ Product.propTypes = {
 };
 
 export default Test4;
-
